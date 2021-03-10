@@ -1,0 +1,29 @@
+.List {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: hidden !important;
+
+    &-container {
+        margin-top: 15px;
+        max-height: 615px;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+
+        &::-webkit-scrollbar {
+            width: 7px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+            background: #bfbfbf;
+            border-radius: 10px;
+            height: 42px;
+        }
+    }
+
+    .Card {
+        display: inline-block;
+    }
+}
