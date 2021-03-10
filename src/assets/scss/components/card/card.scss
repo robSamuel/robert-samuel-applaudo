@@ -1,0 +1,21 @@
+.Card {
+    background-color: #121E28;
+    height: 300px;
+    margin: 10px 8px;
+    width: 200px;
+    position: relative;
+
+    &-image {
+        height: 200px;
+        width: 100%
+    }
+
+    &-title {
+        color: $white;
+        font-size: 17px;
+        height: 30%;
+        margin-bottom: 0;
+        overflow: hidden;
+        padding: 10px;
+    }
+}
