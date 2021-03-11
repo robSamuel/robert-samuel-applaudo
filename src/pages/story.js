@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {
-    getComicCharacters,
-    getComicDetails,
-    getComicStories
-} from "../services/comics";
+    getStoryCharacters,
+    getStoryComics,
+    getStoryDetails
+} from "../services/stories";
 import { 
     DEFAULT_IMAGE,
     getThumbnailUrl,
@@ -11,37 +11,38 @@ import {
     mapListData,
     mapPaginatedData
 } from "../utils";
+
 import Layout from "../components/Layout";
 import List from "../components/List";
 import SEO from "../components/seo";
 
 const DEFAULT_DESCRIPTION =
-    "There is no description provided for this comic";
+    "There is no description provided for this story";
 
-const Comic = ({ location }) => {
-    const [title, setTitle] = useState("");
-    const [image, setImage] = useState(DEFAULT_IMAGE);
+const Story = ({ location }) => {
     const [description, setDescription] = useState("");
+    const [image, setImage] = useState(DEFAULT_IMAGE);
+    const [title, setTitle] = useState("");
     const locationState = location.state || {};
-    const comicId = locationState.id || 0;
+    const storyId = locationState.id || 0;
 
     useEffect(() => {
-        if(comicId)
-            fetchData(comicId);
-    }, [comicId]);
+        if(storyId)
+            fetchData(storyId);
+    }, [storyId]);
 
     const fetchData = async(id) => {
-        const { data } = await getComicDetails(id);
+        const { data } = await getStoryDetails(id);
 
         if(isNotEmptyArray(data.results)) {
-            const comic = data.results[0];
-            const retrievedImage = getThumbnailUrl(comic.thumbnail);
+            const story = data.results[0];
+            const retrievedImage = getThumbnailUrl(story.thumbnail);
             const retrievedDescription =
-                comic && comic.description
-                    ? comic.description
+                story && story.description
+                    ? story.description
                     : DEFAULT_DESCRIPTION;
-            const retrievedTitle = comic && comic.title
-                ? comic.title
+            const retrievedTitle = story && story.title
+                ? story.title
                 : "Not Found";
 
             setDescription(retrievedDescription);
@@ -51,7 +52,7 @@ const Comic = ({ location }) => {
     };
 
     const fetchCharacters = async (options) => {
-        const { data } = await getComicCharacters(comicId, options);
+        const { data } = await getStoryCharacters(storyId, options);
 
         if(data) {
             const fetchedData = mapPaginatedData(data);
@@ -61,8 +62,8 @@ const Comic = ({ location }) => {
         }
     };
 
-    const fetchStories = async (options) => {
-        const { data } = await getComicStories(comicId, options);
+    const fetchComics = async (options) => {
+        const { data } = await getStoryComics(storyId, options);
 
         if(data) {
             const fetchedData = mapPaginatedData(data);
@@ -81,7 +82,7 @@ const Comic = ({ location }) => {
 
     return (
         <Layout>
-            <SEO title="Comic Info" />
+            <SEO title="Story Info" />
             <div className="ItemDetails">
                 <div className="ItemDetails-card">
                     <img
@@ -95,18 +96,18 @@ const Comic = ({ location }) => {
                     </div>
                 </div>
                 <List
-                    listTitle="Characters featured in this comic"
+                    listTitle="Characters featured in this story"
                     retrieveData={fetchCharacters}
                     itemType="character"
                 />
                 <List
-                    listTitle="Stories featuring this comic"
-                    retrieveData={fetchStories}
-                    itemType="story"
+                    listTitle="Comics featured in this story"
+                    retrieveData={fetchComics}
+                    itemType="comic"
                 />
             </div>
         </Layout>
     );
 };
 
-export default Comic;
+export default Story;
