@@ -24,3 +24,68 @@ export const getAllStories = async (options = {}) => {
         return { error };
     }
 };
+
+export const getStoryDetails = async (id = 0) => {
+    const url = `/stories/${id}`;
+
+    try {
+        const fetched = await fetchData({
+            method: "GET",
+            url
+        });
+
+        return { data: fetched.data.data };
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const getStoryComics = async (id = 0, options = {}) => {
+    const url = `/stories/${id}/comics`;
+    const {
+        limit = 20,
+        offset = 0,
+    } = options;
+    const params = {
+        limit,
+        offset,
+        orderBy: "title"
+    };
+
+    try {
+        const fetched = await fetchData({
+            method: "GET",
+            url,
+            params
+        });
+  
+        return { data: fetched.data.data };
+    } catch (error) {
+        return { error };
+    }
+};
+
+export const getStoryCharacters = async (id = 0, options = {}) => {
+    const url = `/stories/${id}/characters`;
+    const {
+        limit = 20,
+        offset = 0,
+    } = options;
+    const params = {
+        limit,
+        offset,
+        orderBy: "name"
+    };
+
+    try {
+        const fetched = await fetchData({
+            method: "GET",
+            url,
+            params
+        });
+  
+        return { data: fetched.data.data };
+    } catch (error) {
+        return { error };
+    }
+};
