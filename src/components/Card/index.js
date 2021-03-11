@@ -7,7 +7,7 @@ const Card = props => {
 
     return (
         <div className="Card">
-            <Link to={`/${itemType}/${id}`} state={{ id: id }}>
+            <Link to={`/${itemType}`} state={{ id: id }}>
                 <img src={image} alt={``} className="Card-image"/>
                 <h3 className="Card-title">{title}</h3>
             </Link>
@@ -18,7 +18,7 @@ const Card = props => {
 Card.propTypes = {
     id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
-    itemType: PropTypes.oneOf(["characters", "comics", "stories"]).isRequired,
+    itemType: PropTypes.oneOf(["character", "comic", "story"]).isRequired,
     title: PropTypes.string.isRequired,
 };
 
