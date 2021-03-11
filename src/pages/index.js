@@ -12,10 +12,8 @@ import { getAllComics } from "../services/comics";
 import { getAllStories } from "../services/stories";
 import { mapPaginatedData } from "../utils";
 
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import SEO from "../components/seo";
-
-import "../assets/scss/main.scss";
 
 const IndexPage = () => {
     const [activeTab, setActiveTab] = useState("1");
@@ -89,19 +87,19 @@ const IndexPage = () => {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
                             <List
-                                itemType="characters"
+                                itemType="character"
                                 retrieveData={fetchCharacters}
                             />
                         </TabPane>
                         <TabPane tabId="2">
                             <List
-                                itemType="comics"
+                                itemType="comic"
                                 retrieveData={fetchComics}
                             />
                         </TabPane>
                         <TabPane tabId="3">
                             <List
-                                itemType="stories"
+                                itemType="story"
                                 retrieveData={fetchStories}
                             />
                         </TabPane>

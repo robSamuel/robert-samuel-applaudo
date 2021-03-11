@@ -11,6 +11,18 @@ export const getThumbnailUrl = (thumbnail) => {
 export const isNotEmptyArray = arr =>
     Array.isArray(arr) && !!arr.length;
 
+    export const mapListData = data => {
+        const mappedList = data.results.map(item => {
+            return {
+                id: item.id,
+                name: item.title || item.name || "",
+                thumbnail: item.thumbnail
+            }
+        });
+    
+        return mappedList;
+    };
+
 export const mapPaginatedData = item => {
     if(!item)
         return {};

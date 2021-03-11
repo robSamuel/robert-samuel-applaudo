@@ -5,16 +5,16 @@ import { getThumbnailUrl, isNotEmptyArray } from "../../utils";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const List = props => {
+    const { itemType, listTitle, retrieveData } = props;
     const [hasMore, setHasMore] = useState(true);
     const [list, setList] = useState([]);
-    const containerId = `ScrollContainer-${props.itemType}`;
 
     const fetchData = async() => {
         const options = {
             limit: 20,
             offset: list.length
         };
-        const data = await props.retrieveData(options);
+        const data = await retrieveData(options);
 
         if(data && data.results) {
             setList((prevList) => {
@@ -26,46 +26,92 @@ const List = props => {
     };
 
     useEffect(() => {
-        fetchData();
+        fetchData();        
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const renderList = props => {
-        if(!isNotEmptyArray(list))
-            return <span>There are no items available</span>;
+    const renderTitle = () => {
+        if(listTitle)
+            return <label className="List-title">{`${listTitle}:`}</label>;
+    }
 
-        return list.map((item, index) => {
-            const label = item.name || item.title || "";
+    const renderList = () => {
+        if(isNotEmptyArray(list)) {
+            return list.map((item, index) => {
+                const label = item.name || item.title || "";
 
-            return (
-                <Card
-                    key={`${index}-${item.id}`}
-                    id={item.id}
-                    title={label}
-                    image={getThumbnailUrl(item.thumbnail)}
-                    itemType={props.itemType}
-                />
-            );
-        });
+                return (
+                    <Card
+                        key={`${index}-${item.id}`}
+                        id={item.id}
+                        title={label}
+                        image={getThumbnailUrl(item.thumbnail)}
+                        itemType={itemType}
+                    />
+                );
+            });            
+        }
+
+        return <span>There are no items available</span>;
     };
 
-    return (
-        <div id={containerId} className="List-container">
-            <InfiniteScroll
-                className="List"
-                dataLength={list.length}
-                hasMore={hasMore}
-                next={fetchData}
-                scrollableTarget={containerId}
-            >
-                {renderList(props)}
-            </InfiniteScroll>           
-        </div>
-    );
+    const renderGeneralList = () => {
+        const containerId = `ScrollContainer-${itemType}`;
+
+        return (
+            <div id={containerId} className="List-container">
+                <InfiniteScroll
+                    className="List"
+                    dataLength={list.length}
+                    hasMore={hasMore}
+                    next={fetchData}
+                    scrollableTarget={containerId}
+                >
+                    {renderList()}
+                </InfiniteScroll>           
+            </div>
+        );
+    };    
+
+    const renderTitledList = () => {
+        const containerId = `ScrollContainer-${itemType}`;
+
+        return (
+            <div className="List-title-container">
+                {renderTitle()}
+                <div id={containerId} className="List-container">
+                    <InfiniteScroll
+                        className="List"
+                        dataLength={list.length}
+                        hasMore={hasMore}
+                        next={fetchData}
+                        scrollableTarget={containerId}
+                    >
+                        {renderList(props)}
+                    </InfiniteScroll>
+                </div>
+            </div>
+        );
+    };
+
+    const render = () => {
+        const component = listTitle
+            ? renderTitledList()
+            : renderGeneralList();
+
+        return component;
+    };
+
+    return render();
+};
+
+List.defaulProps = {
+    listTitle: ""
 };
 
 List.propTypes = {
-    itemType: PropTypes.oneOf(["characters", "comics", "stories"]).isRequired,
+    itemType: PropTypes.oneOf(["character", "comic", "story"]).isRequired,
+    listTitle: PropTypes.string,
     retrieveData: PropTypes.func.isRequired,
 };
 
