@@ -7,6 +7,7 @@
 
  import * as React from "react";
  import PropTypes from "prop-types";
+ import Helmet from "react-helmet";
  
  import Header from "../Header";
  import "../../assets/scss/main.scss"
@@ -28,6 +29,13 @@
            <a href="https://www.gatsbyjs.com">Gatsby</a>
          </footer>
        </div>
+       <Helmet>
+          <script
+              src="https://kit.fontawesome.com/87131fda1b.js"
+              crossorigin="anonymous"
+          >
+          </script>
+      </Helmet>
      </>
    )
  }
