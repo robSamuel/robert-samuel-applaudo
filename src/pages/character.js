@@ -97,12 +97,12 @@ const Character = ({ location }) => {
                 <List
                     listTitle="Comics featuring this character"
                     retrieveData={fetchComics}
-                    itemType="comic"
+                    link="comic"
                 />
                 <List
                     listTitle="Stories featuring this character"
                     retrieveData={fetchStories}
-                    itemType="story"
+                    link="story"
                 />
             </div>
         </Layout>

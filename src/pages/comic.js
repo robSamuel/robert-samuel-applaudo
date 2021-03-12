@@ -97,12 +97,12 @@ const Comic = ({ location }) => {
                 <List
                     listTitle="Characters featured in this comic"
                     retrieveData={fetchCharacters}
-                    itemType="character"
+                    link="character"
                 />
                 <List
                     listTitle="Stories featuring this comic"
                     retrieveData={fetchStories}
-                    itemType="story"
+                    link="story"
                 />
             </div>
         </Layout>

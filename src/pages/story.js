@@ -96,14 +96,14 @@ const Story = ({ location }) => {
                     </div>
                 </div>
                 <List
+                    link="character"
                     listTitle="Characters featured in this story"
                     retrieveData={fetchCharacters}
-                    itemType="character"
                 />
                 <List
+                    link="comic"
                     listTitle="Comics featured in this story"
                     retrieveData={fetchComics}
-                    itemType="comic"
                 />
             </div>
         </Layout>

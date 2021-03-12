@@ -18,4 +18,16 @@
         overflow: hidden;
         padding: 10px;
     }
+
+    &-favorite {
+        background-color: rgba($black, 0.25);
+        border: none;
+        color: $white;
+        height: 35px;
+        width: 35px;
+        right: 0;
+        top: 0;
+        position: absolute;
+        outline: none;
+    }
 }

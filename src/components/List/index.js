@@ -5,9 +5,25 @@ import { getThumbnailUrl, isNotEmptyArray } from "../../utils";
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const List = props => {
-    const { itemType, listTitle, retrieveData } = props;
+    const { link, listTitle, retrieveData } = props;
     const [hasMore, setHasMore] = useState(true);
     const [list, setList] = useState([]);
+
+    const getType = type => {
+        switch(type) {
+            case "character":
+                return "characters";
+
+            case "comic":
+                return "comics";
+
+            case "story":
+                return "stories";
+
+            default:
+                return;
+        }
+    };
 
     const fetchData = async() => {
         const options = {
@@ -37,16 +53,19 @@ const List = props => {
 
     const renderList = () => {
         if(isNotEmptyArray(list)) {
-            return list.map((item, index) => {
+            const type = getType(link);
+
+            return list.map(item => {
                 const label = item.name || item.title || "";
 
                 return (
                     <Card
-                        key={`${index}-${item.id}`}
+                        key={`${type}-${item.id}`}
                         id={item.id}
-                        title={label}
                         image={getThumbnailUrl(item.thumbnail)}
-                        itemType={itemType}
+                        itemType={type}
+                        link={link}
+                        title={label}
                     />
                 );
             });            
@@ -56,7 +75,7 @@ const List = props => {
     };
 
     const renderGeneralList = () => {
-        const containerId = `ScrollContainer-${itemType}`;
+        const containerId = `ScrollContainer-${link}`;
 
         return (
             <div id={containerId} className="List-container">
@@ -74,7 +93,7 @@ const List = props => {
     };    
 
     const renderTitledList = () => {
-        const containerId = `ScrollContainer-${itemType}`;
+        const containerId = `ScrollContainer-${link}`;
 
         return (
             <div className="List-title-container">
@@ -110,7 +129,7 @@ List.defaulProps = {
 };
 
 List.propTypes = {
-    itemType: PropTypes.oneOf(["character", "comic", "story"]).isRequired,
+    link: PropTypes.oneOf(["character", "comic", "story"]).isRequired,
     listTitle: PropTypes.string,
     retrieveData: PropTypes.func.isRequired,
 };
