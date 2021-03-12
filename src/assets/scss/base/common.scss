@@ -63,3 +63,30 @@
         }
     }
 }
+
+.SearchInput {
+    display: flex;
+    max-width: 450px;
+    width: 100%;
+    
+    &-input {
+        background: transparent;
+        border-radius: 25px;
+        border: 2px solid $white;
+        color: $white;
+        display: block;
+        height: 50px;
+        padding-left: 1rem;
+        width: 100%;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &.dark-input {
+            border: 2px solid $black;
+            color: $black;
+            margin: 0 10px;
+        }
+    }
+}
