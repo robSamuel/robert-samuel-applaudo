@@ -54,7 +54,7 @@ const IndexPage = () => {
     
     return ( 
         <Layout>
-            <SEO title="Page" /> 
+            <SEO title="Home" /> 
             <section className="Page">
                 <div className="container-fluid Page-container">
                     <Nav className="NavTabs" tabs>
