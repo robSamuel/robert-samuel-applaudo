@@ -9,6 +9,7 @@
  import PropTypes from "prop-types";
  import Helmet from "react-helmet";
  
+ import Footer from "../Footer";
  import Header from "../Header";
  import "../../assets/scss/main.scss"
  
@@ -19,15 +20,7 @@
        <Header />
        <div>
          <main>{children}</main>
-         <footer
-           style={{
-             marginTop: `2rem`,
-           }}
-         >
-           © {new Date().getFullYear()}, Built with
-           {` `}
-           <a href="https://www.gatsbyjs.com">Gatsby</a>
-         </footer>
+         <Footer />
        </div>
        <Helmet>
           <script
