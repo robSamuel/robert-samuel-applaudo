@@ -215,7 +215,7 @@ const Searchbar = ({ text }) => {
                     </DropdownMenu>
                 </Dropdown>
                 <input
-                    className="Searchbar-input"
+                    className="SearchInput-input dark-input"
                     placeholder="Search"
                     onChange={onSearchChange}
                     type="text"

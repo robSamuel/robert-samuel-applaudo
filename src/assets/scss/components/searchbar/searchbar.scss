@@ -3,12 +3,9 @@
     flex-direction: column;
 
     &-container {
+        align-items: center;
         display: flex;
         justify-content: flex-end;
-    }
-
-    &-input {
-        margin-left: 10px;
     }
 
     &-dropdown {
