@@ -68,7 +68,7 @@ const Story = ({ location }) => {
     return (
         <Layout>
             <SEO title="Story Info" />
-            <div className="ItemDetails">
+            <section className="ItemContainer">
                 <ItenDetails
                     description={description}
                     image={image}
@@ -85,7 +85,7 @@ const Story = ({ location }) => {
                     listTitle="Comics featured in this story"
                     retrieveData={fetchComics}
                 />
-            </div>
+            </section>
         </Layout>
     );
 };
