@@ -2,6 +2,7 @@ import { fetchData } from "../axios";
 
 export const getAllComics = async (options = {}) => {
     const {
+        format = "",
         title = "",
         series = 0,
         limit = 20,
@@ -9,6 +10,9 @@ export const getAllComics = async (options = {}) => {
     } = options;
     let params = { limit, offset };
     const url = "/comics";
+
+    if(format)
+        params.format = format;
 
     if( title)
         params.titleStartsWith = title;
