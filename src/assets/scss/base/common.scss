@@ -10,31 +10,10 @@
     }
 }
 
-.ItemDetails {
+.ItemContainer {
     display: flex;
     flex-direction: column;
     padding-top: 50px;
-
-    &-card {
-        align-items: center;
-        display: flex;
-        flex: 1;
-        justify-content: center;
-    }
-
-    &-image {
-        height: 450px;
-        margin: 0 20px;
-        width: 350px;
-    }
-
-    &-info {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        justify-content: center;
-        width: 400px;
-    }
 }
 
 .NavTabs {
@@ -50,15 +29,18 @@
     }
 
     & .nav-link {
-        background-color: $gray;
-        border-color: $gray $gray $white !important;
-        color: $white;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        border-color: $white $white $gray !important;
+        color: $black;
+        padding: 0.5rem 1.5rem;
         cursor: pointer;
 
         @include OnPointerEvent {
-            background-color: $white;
+            border-color: $white $white $red !important;
+            color: $red;
+        }
+
+        &.active {
+            border-color: $white $white $red !important;
             color: $black;
         }
     }

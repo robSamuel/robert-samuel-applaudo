@@ -7,15 +7,34 @@ import {
     TabContent,
     TabPane
 } from "reactstrap";
+import { isNotEmptyArray } from "../utils";
 import Card from "../components/Card";
 import Layout from "../components/Layout";
 import SEO from "../components/seo";
 
 const Favorites = () => {
     const [activeTab, setActiveTab] = useState("1");
-    const favoriteCharacters = useSelector(state => state.favorites.characters);
-    const favoriteComics = useSelector(state => state.favorites.comics);
-    const favoriteStories = useSelector(state => state.favorites.stories);
+    const favoriteCharacters = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.characters
+            : []
+
+        return list;
+    });
+    const favoriteComics = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.comics
+            : []
+
+        return list;
+    });
+    const favoriteStories = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.stories
+            : []
+
+        return list;
+    });
 
     const toogle = tab => () => {
         if(activeTab !== tab)
@@ -26,26 +45,30 @@ const Favorites = () => {
         tab === activeTab ? "active" : "";
 
     const renderList = list => {
-        const cardsList = list.map(item => {
+        if(isNotEmptyArray(list)) {
+            const cardsList = list.map(item => {
+                return (
+                    <Card
+                        key={`${item.itemType}-${item.id}`}
+                        id={item.id}
+                        image={item.image}
+                        itemType={item.itemType}
+                        link={item.link}
+                        title={item.label}
+                    />
+                )
+            });
+    
             return (
-                <Card
-                    key={`${item.itemType}-${item.id}`}
-                    id={item.id}
-                    image={item.image}
-                    itemType={item.itemType}
-                    link={item.link}
-                    title={item.label}
-                />
-            )
-        });
-
-        return (
-            <div className="List-container">
-                <div className="List">
-                    {cardsList}
+                <div className="List-container">
+                    <div className="List">
+                        {cardsList}
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        return <span className="List-no-items">There are no items available</span>;
     };
 
     return (

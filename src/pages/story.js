@@ -11,13 +11,10 @@ import {
     mapListData,
     mapPaginatedData
 } from "../utils";
-
+import ItenDetails from "../components/ItemDetails";
 import Layout from "../components/Layout";
 import List from "../components/List";
 import SEO from "../components/seo";
-
-const DEFAULT_DESCRIPTION =
-    "There is no description provided for this story";
 
 const Story = ({ location }) => {
     const [description, setDescription] = useState("");
@@ -35,15 +32,10 @@ const Story = ({ location }) => {
         const { data } = await getStoryDetails(id);
 
         if(isNotEmptyArray(data.results)) {
-            const story = data.results[0];
+            const story = data.results[0] || {};
             const retrievedImage = getThumbnailUrl(story.thumbnail);
-            const retrievedDescription =
-                story && story.description
-                    ? story.description
-                    : DEFAULT_DESCRIPTION;
-            const retrievedTitle = story && story.title
-                ? story.title
-                : "Not Found";
+            const retrievedDescription = story.description || "";
+            const retrievedTitle = story.title || "Not Found";
 
             setDescription(retrievedDescription);
             setImage(retrievedImage);
@@ -73,28 +65,16 @@ const Story = ({ location }) => {
         }
     };
 
-    const renderDescription = () => {
-        if(!description)
-            return <p>{DEFAULT_DESCRIPTION}</p>;
-
-        return <p>{description}</p>;
-    };
-
     return (
         <Layout>
             <SEO title="Story Info" />
             <div className="ItemDetails">
-                <div className="ItemDetails-card">
-                    <img
-                        src={image}
-                        alt={title}
-                        className="ItemDetails-image"
-                    />
-                    <div className="ItemDetails-info">
-                        <h1>{title}</h1>
-                        {renderDescription()}
-                    </div>
-                </div>
+                <ItenDetails
+                    description={description}
+                    image={image}
+                    item="story"
+                    label={title}
+                />
                 <List
                     link="character"
                     listTitle="Characters featured in this story"

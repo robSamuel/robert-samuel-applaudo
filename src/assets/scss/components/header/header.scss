@@ -1,34 +1,30 @@
 .Header {
-    background-image: url("https://i.blogs.es/270d91/personajes-de-stan-lee/1366_2000.jpg");
-    background-position: center center;
-    background-size: cover;
-    height: 400px;
-    padding-top: 2rem;
-    position: relative;
-    width: 100%;
-    z-index: 1;
-
-    &:after {
-        background-color: $overlay-color;
-        content: "";
-        display: block;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        z-index: 2;
-    }
-
     &-content {
-        padding: 0 15px;
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
         position: relative;
         z-index: 3;
     }
 
     &-logo {
-        margin-bottom: 2rem;
         text-align: center;
     }
+
+    &-background {
+        background-image: url("https://i.blogs.es/270d91/personajes-de-stan-lee/1366_2000.jpg");
+        background-position: center center;
+        background-size: cover;
+        height: 400px;
+        position: relative;
+        width: 100%;
+
+        @include media-breakpoint-down(md) {
+            height: 250px;
+        }
+    }
+
 }
 
 .HeaderMenu {
@@ -41,7 +37,7 @@
     }
 
     &-link {
-        color: $white;
+        color: $black;
         font-size: 1.2rem;
         font-weight: 600;
         margin: 0 1rem;

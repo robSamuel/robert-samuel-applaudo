@@ -101,9 +101,9 @@ Card.defaultProps = {
 Card.propTypes = {
     id: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
+    itemType: PropTypes.oneOf(["characters", "comics", "stories"]),
     link: PropTypes.oneOf(["character", "comic", "story"]).isRequired,
     title: PropTypes.string.isRequired,
-    itemType: PropTypes.string,
     useFavorite: PropTypes.bool,
 };
 
