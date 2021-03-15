@@ -112,7 +112,7 @@ const List = props => {
             });            
         }
 
-        return <span>There are no items available</span>;
+        return <span className="List-no-items">There are no items available</span>;
     };
 
     const renderGeneralList = () => {

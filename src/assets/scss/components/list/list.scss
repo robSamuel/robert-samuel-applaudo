@@ -7,9 +7,12 @@
     overflow: hidden !important;
 
     &-container {
+        margin-left: auto;
+        margin-right: auto;
         margin-top: 15px;
         max-height: 615px;
-        overflow-y: scroll;
+        max-width: 1600px;
+        overflow-y: auto;
         scrollbar-width: thin;
 
         &::-webkit-scrollbar {
@@ -42,5 +45,18 @@
         font-size: 25px;
         margin-bottom: 25px;
         padding: 0 10px;
+    }
+
+    &-no-items {
+        align-items: center;
+        display: flex;
+        font-size: 18px;
+        height: 150px;
+        justify-content: center;
+        margin: 20px;
+
+        @include media-breakpoint-down(md) {
+            height: 100px;
+        }
     }
 }

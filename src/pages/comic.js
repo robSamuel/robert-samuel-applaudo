@@ -11,12 +11,10 @@ import {
     mapListData,
     mapPaginatedData
 } from "../utils";
+import ItenDetails from "../components/ItemDetails";
 import Layout from "../components/Layout";
 import List from "../components/List";
 import SEO from "../components/seo";
-
-const DEFAULT_DESCRIPTION =
-    "There is no description provided for this comic";
 
 const Comic = ({ location }) => {
     const [title, setTitle] = useState("");
@@ -34,15 +32,10 @@ const Comic = ({ location }) => {
         const { data } = await getComicDetails(id);
 
         if(isNotEmptyArray(data.results)) {
-            const comic = data.results[0];
+            const comic = data.results[0] || {};
             const retrievedImage = getThumbnailUrl(comic.thumbnail);
-            const retrievedDescription =
-                comic && comic.description
-                    ? comic.description
-                    : DEFAULT_DESCRIPTION;
-            const retrievedTitle = comic && comic.title
-                ? comic.title
-                : "Not Found";
+            const retrievedDescription = comic.description || "";
+            const retrievedTitle = comic.title || "Not Found";
 
             setDescription(retrievedDescription);
             setImage(retrievedImage);
@@ -72,28 +65,16 @@ const Comic = ({ location }) => {
         }
     };
 
-    const renderDescription = () => {
-        if(!description)
-            return <p>{DEFAULT_DESCRIPTION}</p>;
-
-        return <p>{description}</p>;
-    };
-
     return (
         <Layout>
             <SEO title="Comic Info" />
-            <div className="ItemDetails">
-                <div className="ItemDetails-card">
-                    <img
-                        src={image}
-                        alt={title}
-                        className="ItemDetails-image"
-                    />
-                    <div className="ItemDetails-info">
-                        <h1>{title}</h1>
-                        {renderDescription()}
-                    </div>
-                </div>
+            <div className="ItemContainer">
+                <ItenDetails
+                    description={description}
+                    image={image}
+                    item="comic"
+                    label={title}
+                />
                 <List
                     listTitle="Characters featured in this comic"
                     retrieveData={fetchCharacters}

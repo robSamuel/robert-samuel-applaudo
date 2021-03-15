@@ -1,6 +1,7 @@
 .Footer {
     background-color: $gray;
     height: 300px;
+    overflow: hidden;
     width: 100%;
 
     .container {
@@ -13,11 +14,15 @@
 
     &-logo {
         align-items: center;
+        justify-content: space-evenly;
+    }
+
+    @include media-breakpoint-down(md) {
+        height: 200px;
     }
 }
 
 .Social {
-
     &-wrapper {
         align-items: center;
         display: flex;
@@ -35,10 +40,6 @@
     &-link {
         height: 40px;
         width: 40px;
-
-        &:hover {
-            background-color: rgba($red, 0.2);
-        }
 
         i {
             color: $white;

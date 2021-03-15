@@ -11,12 +11,10 @@ import {
     mapListData,
     mapPaginatedData
 } from "../utils";
+import ItenDetails from "../components/ItemDetails";
 import List from "../components/List";
 import Layout from "../components/Layout";
 import SEO from "../components/seo";
-
-const DEFAULT_DESCRIPTION =
-    "There is no description provided for this character";
 
 const Character = ({ location }) => {
     const [name, setName] = useState("");
@@ -34,15 +32,10 @@ const Character = ({ location }) => {
         const { data } = await getCharacterDetails(id);
 
         if(isNotEmptyArray(data.results)) {
-            const character = data.results[0];
+            const character = data.results[0] || {};
             const retrievedImage = getThumbnailUrl(character.thumbnail);
-            const retrievedDescription =
-                character && character.description
-                    ? character.description
-                    : DEFAULT_DESCRIPTION;
-            const retrievedName = character && character.name
-                ? character.name
-                : "Not Found";
+            const retrievedDescription = character.description || "";
+            const retrievedName = character.name || "Not Found";
 
             setDescription(retrievedDescription);
             setImage(retrievedImage);
@@ -72,28 +65,16 @@ const Character = ({ location }) => {
         }
     };
 
-    const renderDescription = () => {
-        if(!description)
-            return <p>{DEFAULT_DESCRIPTION}</p>;
-
-        return <p>{description}</p>;
-    };
-
     return (
         <Layout>
             <SEO title="Character Info"/>
-            <div className="ItemDetails">
-                <div className="ItemDetails-card">
-                    <img
-                        src={image}
-                        alt={name}
-                        className="ItemDetails-image"
-                    />
-                    <div className="ItemDetails-info">
-                        <h1>{name}</h1>
-                        {renderDescription()}
-                    </div>
-                </div>
+            <div className="ItemContainer">
+                <ItenDetails
+                    description={description}
+                    image={image}
+                    item="character"
+                    label={name}
+                />
                 <List
                     listTitle="Comics featuring this character"
                     retrieveData={fetchComics}
