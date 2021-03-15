@@ -1,0 +1,52 @@
+.Header {
+    &-content {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 1rem;
+        position: relative;
+        z-index: 3;
+
+        @include media-breakpoint-down(md) {
+            flex-direction: column;
+        }
+    }
+
+    &-logo {
+        text-align: center;
+    }
+
+    &-background {
+        background-image: url("https://i.blogs.es/270d91/personajes-de-stan-lee/1366_2000.jpg");
+        background-position: center center;
+        background-size: cover;
+        height: 400px;
+        position: relative;
+        width: 100%;
+
+        @include media-breakpoint-down(md) {
+            height: 250px;
+        }
+    }
+}
+
+.HeaderMenu {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    &-item {
+        display: inline-block;
+    }
+
+    &-link {
+        color: $black;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 1rem;
+        text-transform: uppercase;
+        @include OnPointerEvent {
+            color: $red;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+.ItemDetails {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+
+    &-card {
+        display: flex;
+    }
+
+    &-image-container {
+        display: flex;
+        justify-content: flex-end;
+
+        @include media-breakpoint-down(md) {
+            justify-content: center;
+        }
+    }
+
+    &-image {
+        height: 160px;
+        margin: 0 30px;
+        width: 160px;
+    }
+
+    &-label-container {
+        @include media-breakpoint-down(md) {
+            text-align: center;
+        }
+    }
+
+    &-description-container {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 40px;
+        max-width: 800px;
+    }
+
+    &-description {
+        padding: 0 10px;
+    }
+}

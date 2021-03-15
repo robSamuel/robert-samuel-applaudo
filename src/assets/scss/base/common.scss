@@ -1,0 +1,84 @@
+.Page {
+    padding: 25px 0;
+    @include media-breakpoint-down(md) {
+        padding: 50px 0;
+    }
+
+    &-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.ItemContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.NavTabs {
+    margin-left: 0;
+        
+    & .nav-item {
+        margin-bottom: 0;
+        margin-right: 8px;
+
+        &:last-of-type {
+            margin-right: 0;
+        }
+    }
+
+    & .nav-link {
+        border-color: $white $white $gray !important;
+        color: $black;
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+
+        @include OnPointerEvent {
+            border-color: $white $white $red !important;
+            color: $red;
+        }
+
+        &.active {
+            border-color: $white $white $red !important;
+            color: $black;
+        }
+    }
+}
+
+.SearchInput {
+    display: flex;
+    max-width: 450px;
+    width: 100%;
+    
+    &-input {
+        background: transparent;
+        border-radius: 25px;
+        border: 2px solid $white;
+        color: $white;
+        display: block;
+        height: 50px;
+        padding-left: 1rem;
+        width: 100%;
+
+        &:focus {
+            outline: 0;
+        }
+
+        &.dark-input {
+            border: 2px solid $black;
+            color: $black;
+            margin: 0 10px;
+        }
+
+        &.search-filters {
+            width: 150px;
+        }
+    }
+}
+
+.footer-text {
+    color: $white;
+    font-weight: 800;
+    text-transform: uppercase;
+}

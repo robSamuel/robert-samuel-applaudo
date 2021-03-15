@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import {
     Nav,
     NavItem,
@@ -6,17 +7,34 @@ import {
     TabContent,
     TabPane
 } from "reactstrap";
-import List from "../components/List";
-import { getAllCharacters } from "../services/characters";
-import { getAllComics } from "../services/comics";
-import { getAllStories } from "../services/stories";
-import { mapPaginatedData } from "../utils";
-
+import { isNotEmptyArray } from "../utils";
+import Card from "../components/Card";
 import Layout from "../components/Layout";
 import SEO from "../components/seo";
 
-const IndexPage = () => {
+const Favorites = () => {
     const [activeTab, setActiveTab] = useState("1");
+    const favoriteCharacters = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.characters
+            : []
+
+        return list;
+    });
+    const favoriteComics = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.comics
+            : []
+
+        return list;
+    });
+    const favoriteStories = useSelector(state => {
+        const list = state && state.favorites
+            ? state.favorites.stories
+            : []
+
+        return list;
+    });
 
     const toogle = tab => () => {
         if(activeTab !== tab)
@@ -26,35 +44,36 @@ const IndexPage = () => {
     const getLinkClass = tab => 
         tab === activeTab ? "active" : "";
 
-    const processRetrievedData = data => {
-        if(data) {
-            const fetchedData = mapPaginatedData(data);
-
-            return fetchedData;
-        }
-    };
-
-    const fetchCharacters = async(options) => {
-        const { data } = await getAllCharacters(options);
-
-        return processRetrievedData(data);
-    };
-
-    const fetchComics = async(options) => {
-        const { data } = await getAllComics(options);
-
-        return processRetrievedData(data);
-    };
-
-    const fetchStories = async(options) => {
-        const { data } = await getAllStories(options);
-
-        return processRetrievedData(data);
-    };
+    const renderList = list => {
+        if(isNotEmptyArray(list)) {
+            const cardsList = list.map(item => {
+                return (
+                    <Card
+                        key={`${item.itemType}-${item.id}`}
+                        id={item.id}
+                        image={item.image}
+                        itemType={item.itemType}
+                        link={item.link}
+                        title={item.label}
+                    />
+                )
+            });
     
-    return ( 
+            return (
+                <div className="List-container">
+                    <div className="List">
+                        {cardsList}
+                    </div>
+                </div>
+            );
+        }
+
+        return <span className="List-no-items">There are no items available</span>;
+    };
+
+    return (
         <Layout>
-            <SEO title="Home" /> 
+            <SEO title="Favorites" />
             <section className="Page">
                 <div className="container-fluid Page-container">
                     <Nav className="NavTabs" tabs>
@@ -85,22 +104,13 @@ const IndexPage = () => {
                     </Nav>
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
-                            <List
-                                link="character"
-                                retrieveData={fetchCharacters}
-                            />
+                            {renderList(favoriteCharacters)}
                         </TabPane>
                         <TabPane tabId="2">
-                            <List
-                                link="comic"
-                                retrieveData={fetchComics}
-                            />
+                            {renderList(favoriteComics)}
                         </TabPane>
                         <TabPane tabId="3">
-                            <List
-                                link="story"
-                                retrieveData={fetchStories}
-                            />
+                            {renderList(favoriteStories)}
                         </TabPane>
                     </TabContent>
                 </div>
@@ -109,4 +119,4 @@ const IndexPage = () => {
     );
 };
 
-export default IndexPage
+export default Favorites;

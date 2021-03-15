@@ -1,0 +1,32 @@
+.Card {
+    height: 300px;
+    width: 200px;
+    position: relative;
+
+    &-image {
+        height: 230px;
+        width: 100%
+    }
+
+    &-favorite {
+        background-color: rgba($black, 0.25);
+        border: none;
+        bottom: 35px;
+        color: $white;
+        height: 35px;
+        left: 0;
+        outline: none;
+        position: absolute;
+        width: 35px;
+    }
+
+    &-title {
+        color: $black;
+        font-size: 17px;
+        height: 30%;
+        margin-bottom: 0;
+        margin-left: 35px;
+        overflow: hidden;
+        padding: 10px;
+    }
+}

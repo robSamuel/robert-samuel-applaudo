@@ -1,0 +1,16 @@
+// External styles
+@import "./vendor/vendor.scss";
+
+// Base styles
+@import "./base/base.scss";
+
+// Components
+@import "./components/card/card.scss";
+@import "./components/footer/footer.scss";
+@import "./components//header/header.scss";
+@import "./components/item-details/item-details.scss";
+@import "./components/list/list.scss";
+@import "./components/searchbar/searchbar.scss";
+
+// Pages
+@import "./pages/home/home.scss";
