@@ -2,6 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'gatsby';
 import Logo from "../Logo";
+import Searchbar from "../Searchbar";
 
 const MENU_ITEMS = [
     {
@@ -54,6 +55,7 @@ const Header = () => {
                 <ul className="HeaderMenu">
                     {renderMenuItems()}
                 </ul>
+                <Searchbar />
             </div>
             <div className="Header-background" />
         </header>

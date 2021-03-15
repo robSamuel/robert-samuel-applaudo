@@ -1,0 +1,58 @@
+.Searchbar {
+    display: flex;
+    flex-direction: column;
+
+    &-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &-input {
+        margin-left: 10px;
+    }
+
+    &-dropdown {
+        button {
+            width: 115px;
+        }
+    }
+
+    &-main-container {
+        position: absolute;
+        top: 84px;
+        right: 0;
+        width: 40%;
+    }
+
+    &-matches {
+        background-color: #f8f9fa;
+        display: block;
+        list-style: none;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+        z-index: 900;
+    }
+
+    &-match {
+        display: inline-block;
+    }
+
+    &-match-container {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        margin: 5px;
+    }
+
+    &-match-type {
+        margin-bottom: 0;
+    }
+
+    &-match-label {
+        width: 120px;
+        height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

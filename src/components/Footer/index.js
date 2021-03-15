@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from 'uuid';
 import Logo from "../Logo";
 
 const SOCIAL_MEDIA = [
@@ -45,7 +46,7 @@ const Footer = () => {
         return SOCIAL_MEDIA.map(item => {
 
             return (
-                <li className="Social-item">
+                <li className="Social-item" key={uuidv4()}>
                     <a
                         aria-label={`Follow Marvel on ${item.network}`}
                         className="Social-link"
@@ -54,7 +55,7 @@ const Footer = () => {
                         target="_blank"
                         title={`Follow Marvel on ${item.network}`}
                     >
-                        <i class={item.icon} />
+                        <i className={item.icon} />
                     </a>
                 </li>
             )
